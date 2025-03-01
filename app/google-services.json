@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "176999623482",
+    "project_id": "chatapp-1a5a1",
+    "storage_bucket": "chatapp-1a5a1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176999623482:android:1fe7d63795b4f8786bfe03",
+        "android_client_info": {
+          "package_name": "com.alihan.messageapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxJdX5RUCNciclvJ7Z-5DRbIVczesv2g8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
