@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">MessageAPP</string>
+    <string name="app_name">ChatAPat</string>
+    <string name="welcome">Welcome to ChatAPat</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signin">Sign in</string>
+    <string name="signup">Create Now</string>
+    <string name="dont_have_account">Don\'t have account</string>
 </resources>
