@@ -36,12 +36,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.alihan.messageapp.R
 import com.alihan.messageapp.ui.theme.Black
 import com.alihan.messageapp.ui.theme.BlueGray
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    viewModel: LoginViewModel = hiltViewModel(),
+    onLoginSuccess: () -> Unit) {
     Surface {
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
