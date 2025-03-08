@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.alihan.messageapp.presentation.login.LoginScreen
+import com.alihan.messageapp.presentation.navigation.AppNavHost
 import com.alihan.messageapp.ui.theme.MessageAPPTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MessageAPPTheme {
-                LoginScreen()
+                AppNavHost()
             }
         }
     }
