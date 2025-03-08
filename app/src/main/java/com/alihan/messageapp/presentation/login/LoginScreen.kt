@@ -15,12 +15,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,6 +48,8 @@ fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel(),
     onLoginSuccess: () -> Unit) {
     Surface {
+        val state by viewModel.uiState.collectAsState()
+
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
 
@@ -116,8 +120,17 @@ fun LoginScreen(
                     .fillMaxWidth(),
                 label = { Text(text = stringResource(id = R.string.password)) }
             )
+            when (state) {
+                is AuthState.Loading -> CircularProgressIndicator()
+                is AuthState.Error -> Text(text = (state as AuthState.Error).message, color = Color.Red)
+                is AuthState.Success -> {
+                    onLoginSuccess()
+                }
+                AuthState.Idle -> {}
+            }
 
-            Button(onClick = {  }, modifier = Modifier
+
+            Button(onClick = { viewModel.login(email, password)  }, modifier = Modifier
                 .padding(start = 25.dp, end = 25.dp, top = 10.dp)
                 .fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
