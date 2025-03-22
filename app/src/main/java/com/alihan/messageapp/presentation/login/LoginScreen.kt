@@ -1,6 +1,7 @@
 package com.alihan.messageapp.presentation.login
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,17 +37,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.alihan.messageapp.R
+import com.alihan.messageapp.presentation.component.textFieldCommon
 import com.alihan.messageapp.ui.theme.Black
 import com.alihan.messageapp.ui.theme.BlueGray
 
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel(),
-    onLoginSuccess: () -> Unit) {
+    onLoginSuccess: () -> Unit,
+    onSignUpClick: () -> Unit) {
     Surface {
         val state by viewModel.uiState.collectAsState()
 
@@ -100,26 +104,16 @@ fun LoginScreen(
                 style = MaterialTheme.typography.headlineMedium,
                 color = uiColors
             )
-
-            OutlinedTextField(
+            textFieldCommon(
                 value = email,
-                maxLines = 1,
                 onValueChange = { email = it },
-                modifier = Modifier
-                    .padding(start = 25.dp, end = 25.dp, bottom = 10.dp)
-                    .fillMaxWidth(),
-                label = { Text(text = stringResource(id = R.string.email)) }
-            )
-            
-            OutlinedTextField(
+                text = stringResource(id = R.string.email))
+            textFieldCommon(
                 value = password,
-                maxLines = 1,
                 onValueChange = { password = it },
-                modifier = Modifier
-                    .padding(start = 25.dp, end = 25.dp, bottom = 10.dp)
-                    .fillMaxWidth(),
-                label = { Text(text = stringResource(id = R.string.password)) }
-            )
+                text = stringResource(id = R.string.password)
+                ,isPassword = true)
+
             when (state) {
                 is AuthState.Loading -> CircularProgressIndicator()
                 is AuthState.Error -> Text(text = (state as AuthState.Error).message, color = Color.Red)
@@ -147,15 +141,17 @@ fun LoginScreen(
                     style = TextStyle(fontSize = 13.sp)
                     )
                 Text(
-                    modifier = Modifier.padding(start = 4.dp),
+                    modifier = Modifier
+                        .padding(start = 4.dp)
+                        .clickable { onSignUpClick() },
                     text = stringResource(id = R.string.signup),
                     color = if(isSystemInDarkTheme()) White else Black,
                     style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 13.sp)
                 )
-                
+
             }
-            
-            
+
+
         }
     }
 }
